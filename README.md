@@ -1,4 +1,6 @@
 # vue-apollo-instagram-example
+
+[![Greenkeeper badge](https://badges.greenkeeper.io/graphcool-examples/vue-apollo-instagram-example.svg)](https://greenkeeper.io/)
 📷  Instagram clone built with Vue 2 &amp; Apollo
 
 ## Getting Started
