@@ -1,20 +1,71 @@
 <template>
-  <div class="app">
-    <feed/>
-    <create/>
-  </div>
+    <div class="app">
+
+        <login v-if="!authenticated" />
+
+        <div v-else>
+            <span class="logout" @click="logout()">Logout</span>
+            <newpost />
+        </div>
+
+        <div class="feed">
+            <feed />
+        </div>
+
+    </div>
+
 </template>
 
 <script>
 import ListPage from './components/ListPage.vue'
-import CreatePost from './components/CreatePost.vue'
+import NewPostLink from './components/NewPostLink.vue'
+import LoginAuth0 from './components/LoginAuth0.vue'
+import gql from 'graphql-tag'
+
+const userQuery = gql`
+  query userQuery {
+    user {
+      id
+    }
+  }
+`
 
 export default {
-  name: 'app',
-  components: {
-    'feed': ListPage,
-    'create': CreatePost,
-  },
+    name: 'app',
+    data: () => ({
+        authenticated: false,
+        user: {}
+    }),
+    components: {
+        'login': LoginAuth0,
+        'feed': ListPage,
+        'newpost': NewPostLink,
+    },
+    methods: {
+
+        login() {
+            this.lock.show();
+        },
+
+        logout() {
+            // To log out, we just need to remove the token and profile
+            // from local storage
+            localStorage.removeItem('id_token');
+            localStorage.removeItem('profile');
+            this.authenticated = false;
+        },
+    },
+
+    apollo: {
+        user: {
+            query: userQuery,
+            options: {
+                forceFetch: true,
+            },
+        },
+    }
+
+
 }
 </script>
 
