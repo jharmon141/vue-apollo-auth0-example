@@ -2,18 +2,18 @@ import Vue from 'vue'
 import Router from 'vue-router'
 import CreateUser from  '../components/CreateUser.vue'
 import CreatePost from '../components/CreatePost.vue'
-import App from '../App.vue'
+import Home from '../components/Home.vue'
 
 Vue.use(Router)
 
 export default new Router({
 
+  mode: 'history',
   routes: [
-
     { 
       path: '/', 
-      name: 'App',
-      component: App,
+      name: 'Home',
+      component: Home,
     },
     {
       path: '/signup',

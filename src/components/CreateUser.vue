@@ -1,9 +1,9 @@
 <template>
 
-    <div>
+    <div class="createUser">
         <input v-model="email" placeholder="E-mail Address">
         <input v-model="name" placeholder="Name">
-        <input v-model="emailSubscription" type="checkbox" @click="toggleSubscription()">
+        <input v-model="emailSubscription" type="checkbox">
         <span>Subscribe to email notifications?</span>
 
         <button @click="create()">Sign Up</button>
@@ -50,24 +50,20 @@ export default {
         },
 
         create() {
-            const userInfo = {
-                idToken: localStorage.getItem('auth0IdToken'),
-                emailAddress: this.email,
-                name: this.name,
-                emailSubscription: this.emailSubscription,
-            }
+
+                let idToken = localStorage.getItem('auth0IdToken')
+                let emailAddress = this.email
+                let name = this.name
+                let emailSubscription = this.emailSubscription
 
             // Mutation
             this.$apollo.mutate({
                 mutation: createUser,
-                variables: {userInfo},
-                updateQueries: {
-                    userQuery: (prev, { mutationResult }) => {
-                        return {
-                            // append at head of list because we sort the posts reverse chronological
-                            user: [mutationResult.data.createPost, ...prev.allPosts],
-                        }
-                    },
+                variables: {
+                    idToken,
+                    emailAddress,
+                    name,
+                    emailSubscription,
                 },
             }).then((data) => {
                 // Result
@@ -80,3 +76,13 @@ export default {
     }
 }
 </script>
+
+<style>
+
+.createUser {
+  text-align: center;
+  display: flex;
+  justify-content: flex-start;
+  flex-direction: column;
+}
+</style>

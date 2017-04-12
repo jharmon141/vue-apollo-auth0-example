@@ -1,16 +1,25 @@
 <template>
-    <div class="app">
+    <div>
 
-        <router-view></router-view>
+        <login v-if="!authenticated" />
+
+        <div v-else>
+            <span class="logout" @click="logout()">Logout</span>
+            <newpost />
+        </div>
+
+        <div class="feed">
+            <feed />
+        </div>
 
     </div>
 
 </template>
 
 <script>
-import ListPage from './components/ListPage.vue'
-import NewPostLink from './components/NewPostLink.vue'
-import LoginAuth0 from './components/LoginAuth0.vue'
+import ListPage from './ListPage.vue'
+import NewPostLink from './NewPostLink.vue'
+import LoginAuth0 from './LoginAuth0.vue'
 import gql from 'graphql-tag'
 
 const userQuery = gql`
