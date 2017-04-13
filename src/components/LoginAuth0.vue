@@ -12,8 +12,7 @@ import Auth0Lock from 'auth0-lock'
 export default {
 
     data: () => ({
-        secretThing: '',
-        lock: new Auth0Lock('AJhg1KjBM1iEAof3307nVM34qnJwlqqD', 'jharmon141.auth0.com')
+        lock: new Auth0Lock('iBYFD3fZpwKmvINx4Spwm1zjP5M137QH', 'jharmon141.auth0.com'),
     }),
 
     mounted() {

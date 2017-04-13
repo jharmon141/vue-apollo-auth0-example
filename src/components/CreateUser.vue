@@ -57,10 +57,11 @@ export default {
 
         create() {
 
-            let idToken = localStorage.getItem('auth0IdToken')
+            let idToken = window.localStorage.getItem('auth0IdToken')
             let emailAddress = this.email
             let name = this.name
             let emailSubscription = this.emailSubscription
+            console.log(idToken)
 
             // Mutation
             this.$apollo.mutate({
@@ -70,14 +71,6 @@ export default {
                     emailAddress,
                     name,
                     emailSubscription,
-                },
-                updateQueries: {
-                    user: (prev, { mutationResult }) => {
-                        return {
-                            // append at head of list because we sort the posts reverse chronological
-                            user: [mutationResult.data.createUser, ...prev.user],
-                        }
-                    },
                 },
             }).then((data) => {
                 // Result

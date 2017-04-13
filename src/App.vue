@@ -1,7 +1,7 @@
 <template>
     <div class="app">
 
-        <router-view :user="user"></router-view>
+        <router-view :user='user'></router-view>
 
     </div>
 
@@ -15,25 +15,29 @@ import Auth0Lock from 'auth0-lock'
 import gql from 'graphql-tag'
 
 const userQuery = gql`
-  query($id: String!) {
-    user(id: $id) {
+  query {
+    user {
       id
     }
   }
 `
 
 export default {
+    
     name: 'app',
+
     data: () => ({
         authenticated: false,
         user: {},
-        lock: new Auth0Lock('AJhg1KjBM1iEAof3307nVM34qnJwlqqD', 'jharmon141.auth0.com'),
+        lock: new Auth0Lock('iBYFD3fZpwKmvINx4Spwm1zjP5M137QH', 'jharmon141.auth0.com'),
     }),
+
     components: {
         'login': LoginAuth0,
         'feed': ListPage,
         'newpost': NewPostLink,
     },
+
     methods: {
 
         login() {
@@ -53,7 +57,7 @@ export default {
 
         this.lock.on('authenticated', (authResult) => {
             console.log('authenticated')
-            localStorage.setItem('id_token', authResult.idToken)
+            localStorage.setItem('auth0IdToken', authResult.idToken)
             this.lock.getProfile(authResult.idToken, (error, profile) => {
                 if (error) {
                     // Handle error
@@ -73,9 +77,7 @@ export default {
     apollo: {
         user: {
             query: userQuery,
-            options: {
-                forceFetch: true,
-            },
+            forceFetch: true,
         },
     }
 }

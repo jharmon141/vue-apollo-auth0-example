@@ -59,9 +59,7 @@ export default {
     apollo: {
         user: {
             query: userQuery,
-            options: {
-                forceFetch: true,
-            },
+            fetchPolicy: 'network-only',
         },
     }
 
