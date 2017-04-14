@@ -25,14 +25,25 @@ const userQuery = gql`
 `
 
 export default {
-    
+
     name: 'app',
 
     data: () => ({
         authenticated: false,
         user: {},
-        lock: new Auth0Lock('iBYFD3fZpwKmvINx4Spwm1zjP5M137QH', 'jharmon141.auth0.com'),
+        lock: new Auth0Lock('iBYFD3fZpwKmvINx4Spwm1zjP5M137QH', 'jharmon141.auth0.com', {
+            auth: {
+                responseType: 'token',
+            }
+        }),
     }),
+
+    apollo: {
+        user: {
+            fetchPolicy: 'network-only',
+            query: userQuery,
+        },
+    },
 
     components: {
         'CreateUser': CreateUser,
@@ -47,37 +58,26 @@ export default {
             // To log out, we just need to remove the token and profile
             // from local storage
             localStorage.removeItem('auth0IdToken')
-            localStorage.removeItem('id_token')
             localStorage.removeItem('profile')
-            this.isAuthenticated = false
+            this.authenticated = false
+            this.user = {}
         },
 
+        checkAuth() {
+            return !!localStorage.getItem('auth0IdToken')
+        }
+
     },
 
-    mounted() {
+    beforeMount() {
 
-        this.lock.on('authenticated', (authResult) => {
-            console.log('authenticated')
-            window.localStorage.setItem('auth0IdToken', authResult.idToken)
-            this.lock.getProfile(authResult.idToken, (error, profile) => {
-                console.log("here")
-                if (error) {
-                    // Handle error
-                    return
-                }
-                // Set the token and user profile in local storage
-                localStorage.setItem('profile', JSON.stringify(profile))
-
-                this.authenticated = true
-            })
-        })
-    },
-
-    apollo: {
-        user: {
+        this.$apollo.query({
             query: userQuery,
-            forceFetch: true,
-        },
+        }).then((response) => {
+            // Result
+            this.authenticated = this.checkAuth()
+            console.log(this.authenticated)
+        })
     }
 }
 

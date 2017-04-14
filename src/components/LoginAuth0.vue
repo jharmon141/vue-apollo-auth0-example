@@ -30,7 +30,17 @@ export default {
     mounted() {
         //check for authentication on mount
         this.lock.on('authenticated', (authResult) => {
-            window.localStorage.setItem('auth0IdToken', authResult.idToken);
+            window.localStorage.setItem('auth0IdToken', authResult.idToken)
+            this.lock.getProfile(authResult.idToken, (error, profile) => {
+                console.log("here")
+                if (error) {
+                    // Handle error
+                    return
+                }
+                // Set the token and user profile in local storage
+                localStorage.setItem('profile', JSON.stringify(profile))
+
+            })
             this.$router.push({ name: 'CreateUser' });
         });
         this.lock.on('authorization_error', (error) => {
