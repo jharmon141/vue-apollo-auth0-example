@@ -76,7 +76,6 @@ export default {
         }).then((response) => {
             // Result
             this.authenticated = this.checkAuth()
-            console.log(this.authenticated)
         })
     }
 }

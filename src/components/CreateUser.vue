@@ -69,7 +69,6 @@ export default {
             let emailAddress = this.email
             let name = this.name
             let emailSubscription = this.emailSubscription
-            console.log(idToken)
 
             // Mutation
             this.$apollo.mutate({
@@ -82,7 +81,6 @@ export default {
                 },
             }).then((data) => {
                 // Result
-                console.log(data)
                 this.$router.push({ name: 'Home' });
             }).catch((error) => {
                 // Error
