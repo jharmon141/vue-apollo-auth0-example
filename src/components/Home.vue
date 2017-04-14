@@ -1,10 +1,12 @@
 <template>
-    <div>
+    <div class="home">
 
-        <login v-if="!authenticated" />
+        <login :lock="lock" v-if="!authenticated" />
 
-        <div v-else>
-            <span class="logout" @click="logout()">Logout</span>
+        <div v-else class="logout">
+            <div class="logoutButton">
+                <span class="logoutText" @click="logout()">Logout</span>
+            </div>
             <newpost />
         </div>
 
@@ -13,91 +15,72 @@
         </div>
 
     </div>
-
 </template>
+
 
 <script>
 import ListPage from './ListPage.vue'
 import NewPostLink from './NewPostLink.vue'
 import LoginAuth0 from './LoginAuth0.vue'
 import gql from 'graphql-tag'
-
-const userQuery = gql`
-  query userQuery {
-    user {
-      id
-    }
-  }
-`
+import Auth0Lock from 'auth0-lock'
 
 export default {
-    name: 'app',
-    data: () => ({
-        authenticated: false,
-        user: {}
-    }),
+    name: 'home',
+
+    props: {
+        authenticated: {
+            type: Boolean
+        },
+        user: {
+            type: Object
+        },
+        lock: {
+            type: Object
+        }
+    },
+
     components: {
         'login': LoginAuth0,
         'feed': ListPage,
-        'newpost': NewPostLink,
+        'newpost': NewPostLink
     },
+
     methods: {
 
         login() {
-            this.lock.show();
+            this.lock.show()
         },
 
         logout() {
-            // To log out, we just need to remove the token and profile
-            // from local storage
-            localStorage.removeItem('id_token');
-            localStorage.removeItem('profile');
-            this.authenticated = false;
-        },
+            this.$parent.logout()
+        }
+
     },
-
-    apollo: {
-        user: {
-            query: userQuery,
-            fetchPolicy: 'network-only',
-        },
-    }
-
 
 }
 </script>
 
+
 <style>
 
-body, input, button {
-  font-family: Helvetica, sans-serif;
-  font-size: 16pt;
+.logoutButton {
+    width: 130px;
+    height: 36px;
+    cursor: pointer;
+    background-color: red;
+    color: white;
+    font-size: 26px;
+    padding-top: 5px;
+    margin-bottom: 8px;
 }
 
-ul li {
-  list-style: none;
+.logout {
+    width: 130px;
 }
 
-.app {
-  text-align: center;
-  display: flex;
-  justify-content: center;
-
-  padding: 12px;
-  margin: auto;
+.logoutText {
+    vertical-align: center;
 }
-
-input:focus {
-  box-shadow: none;
-  outline: none;
-  border-color: #40b883;
-}
-
-input {
-  padding: 8px;
-  border: solid 1px #bbb;
-  border-radius: 2px;
-}
-
 
 </style>

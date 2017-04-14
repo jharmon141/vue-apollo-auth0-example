@@ -9,6 +9,7 @@
 
 <script>
 import gql from 'graphql-tag'
+
 const createPost = gql`
   mutation createPost($description: String!, $imageUrl: String!) {
     createPost(description: $description, imageUrl: $imageUrl) {
@@ -23,6 +24,12 @@ export default {
     description: '',
     imageUrl: '',
   }),
+
+  props: {
+      authenticated: {
+          type: Boolean
+      }
+  },
 
   // Attribute
   methods: {
@@ -40,20 +47,13 @@ export default {
           description,
           imageUrl,
         },
-        updateQueries: {
-          allPosts: (prev, { mutationResult }) => {
-            return {
-              // append at head of list because we sort the posts reverse chronological
-              allPosts: [mutationResult.data.createPost, ...prev.allPosts],
-            }
-          },
-        },
       }).then((data) => {
-        // Result
-        console.log(data)
+          // Result
+          console.log(data)
+          this.$router.push({ name: 'Home' });
       }).catch((error) => {
-        // Error
-        console.error(error)
+          // Error
+          console.error(error)
       })
     },
   },
@@ -63,10 +63,10 @@ export default {
 <style>
 
 .create {
-  text-align: center;
-  display: flex;
-  justify-content: flex-start;
-  flex-direction: column;
+    text-align: center;
+    display: flex;
+    justify-content: flex-start;
+    flex-direction: column;
 }
 
 </style>

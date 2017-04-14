@@ -14,6 +14,7 @@
 
 <script>
 import gql from 'graphql-tag'
+import VueTypes from 'vue-types'
 
 const createUser = gql`
   mutation ($idToken: String!, $name: String!, $emailAddress: String!, $emailSubscription: Boolean!){
@@ -23,30 +24,24 @@ const createUser = gql`
   }
 `
 
-const userQuery = gql`
-  query {
-    user {
-      id
-    }
-  }
-`
-
 export default {
-
-    props: {
-        user: {},
-    },
 
     data: () => ({
         email: '',
         name: '',
-        emailSubscription: false
+        emailSubscription: false,
     }),
+
+    props: {
+        user: {
+            type: Object
+        }
+    },
 
     mounted() {
 
         // redirect if user is logged in or did not finish Auth0 Lock dialog
-        if (this.user || window.localStorage.getItem('auth0IdToken') === null) {
+        if (this.user.id ||  window.localStorage.getItem('auth0IdToken') === null) {
             console.warn('not a new user or already logged in')
             this.$router.push({ name: 'Home' });
         }
@@ -81,7 +76,8 @@ export default {
                 console.error(error)
             })
         },
-    }
+    },
+
 }
 </script>
 

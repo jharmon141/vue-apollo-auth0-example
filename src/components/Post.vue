@@ -9,8 +9,8 @@
   export default {
     data: () => ({
       image: {
-        'min-width': '60%',
-        'max-width': '60%'
+        'min-width': '50%',
+        'max-width': '50%'
       }
     }),
     props: {
