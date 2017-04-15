@@ -30,7 +30,7 @@ export default {
     data: () => ({
         authenticated: false,
         user: {},
-        lock: new Auth0Lock('iBYFD3fZpwKmvINx4Spwm1zjP5M137QH', 'jharmon141.auth0.com', {
+        lock: new Auth0Lock('__AUTH0_CLIENT_ID__', '__AUTH0_DOMAIN__', {
             auth: {
                 responseType: 'token',
             }

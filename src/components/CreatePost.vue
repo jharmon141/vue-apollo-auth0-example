@@ -1,5 +1,5 @@
 <template>
-  <div class='create'>
+  <div class="create">
     <input v-model="description" placeholder="Description">
     <input v-model="imageUrl" placeholder="Image url">
 

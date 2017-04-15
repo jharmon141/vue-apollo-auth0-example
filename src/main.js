@@ -6,7 +6,7 @@ import router from './router'
 
 // connect to GraphQL project
 const networkInterface = createNetworkInterface({
-  uri: 'https://api.graph.cool/simple/v1/cj19gfbrwlzmw018968p2w6fc',
+  uri: 'https://api.graph.cool/simple/v1/__PROJECT_ID__',
 })
 
 
