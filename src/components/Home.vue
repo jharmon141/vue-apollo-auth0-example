@@ -22,8 +22,8 @@
 import ListPage from './ListPage.vue'
 import NewPostLink from './NewPostLink.vue'
 import LoginAuth0 from './LoginAuth0.vue'
-import gql from 'graphql-tag'
 import Auth0Lock from 'auth0-lock'
+import gql from 'graphql-tag'
 
 export default {
     name: 'home',

@@ -13,11 +13,6 @@
   </div>
 </template>
 
-<style>
-.post {
-  margin-bottom: 20px
-}
-</style>
 
 <script>
 import gql from 'graphql-tag'
@@ -54,3 +49,13 @@ export default {
   }
 }
 </script>
+
+
+<style>
+
+.post {
+  margin-bottom: 20px
+}
+
+</style>
+

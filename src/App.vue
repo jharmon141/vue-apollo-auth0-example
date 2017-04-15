@@ -11,7 +11,6 @@
 import NewPostLink from './components/NewPostLink.vue'
 import Home from './components/Home.vue'
 import LoginAuth0 from './components/LoginAuth0.vue'
-import CreateUser from './components/CreateUser.vue'
 import CreatePost from './components/CreatePost.vue'
 import Auth0Lock from 'auth0-lock'
 import gql from 'graphql-tag'
@@ -46,7 +45,6 @@ export default {
     },
 
     components: {
-        'CreateUser': CreateUser,
         'Home': Home,
         'CreatePost': CreatePost,
         'LoginAuth0': LoginAuth0
