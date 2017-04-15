@@ -75,6 +75,7 @@ export default {
             query: userQuery,
         }).then((response) => {
             // Result
+            this.user = response.data.user
             this.authenticated = this.checkAuth()
         })
     }

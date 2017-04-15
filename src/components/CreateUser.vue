@@ -41,7 +41,7 @@ export default {
         user: {}
     }),
 
-    beforeMount() {
+    mounted() {
 
             // Mutation
             this.$apollo.query({

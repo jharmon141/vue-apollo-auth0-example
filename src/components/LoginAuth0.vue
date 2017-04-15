@@ -32,7 +32,6 @@ export default {
         this.lock.on('authenticated', (authResult) => {
             window.localStorage.setItem('auth0IdToken', authResult.idToken)
             this.lock.getProfile(authResult.idToken, (error, profile) => {
-                console.log("here")
                 if (error) {
                     // Handle error
                     return
