@@ -1,0 +1,10 @@
+{
+    "name": "instagram-clone",
+    "version": "1.0.0",
+    "description": "A Vue.js project",
+    "author": "jharmon141",
+    "private": true,
+    "scripts": {
+      "postinstall": "npm install express"
+    }
+   }
