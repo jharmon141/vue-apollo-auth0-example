@@ -1,18 +1,74 @@
 <template>
-  <div class="home">
-    <img src="../assets/logo.png">
-    <HelloWorld msg="Welcome to Your Vue.js App"/>
-  </div>
+    <div class="home">
+
+        <LoginAuth0 :lock="lock"
+            v-on:fetchUser="fetchUser"
+            v-if="!authenticated" />
+
+        <div v-else
+            class="logout">
+            <div class="logoutButton">
+                <span class="logoutText"
+                    @click="$emit('logout')">Logout</span>
+            </div>
+            <NewPostLink />
+        </div>
+
+        <div class="feed">
+            <PostsList />
+        </div>
+
+    </div>
 </template>
 
+
 <script>
-// @ is an alias to /src
-import HelloWorld from '@/components/HelloWorld.vue'
+import PostsList from '@/components/PostsList.vue'
+import NewPostLink from '@/components/NewPostLink.vue'
+import LoginAuth0 from '@/components/LoginAuth0.vue'
 
 export default {
-  name: 'home',
-  components: {
-    HelloWorld
-  }
+    name: 'Home',
+    props: {
+        authenticated: Boolean,
+        user: Object,
+        lock: Object,
+        fetchUser: Function
+    },
+
+    components: {
+        LoginAuth0,
+        PostsList,
+        NewPostLink
+    },
+
+    methods: {
+        login() {
+            this.lock.show()
+        }
+    },
+
 }
 </script>
+
+
+<style>
+.logoutButton {
+  width: 130px;
+  height: 36px;
+  cursor: pointer;
+  background-color: red;
+  color: white;
+  font-size: 26px;
+  padding-top: 5px;
+  margin-bottom: 8px;
+}
+
+.logout {
+  width: 130px;
+}
+
+.logoutText {
+  vertical-align: center;
+}
+</style>
