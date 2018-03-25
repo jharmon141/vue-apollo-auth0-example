@@ -1,4 +1,4 @@
-# vue-apollo-instagram-example
+# Vue Apollo Auth0 Example
 📷  Instagram clone built with Vue 2 &amp; Apollo
 
 ## Getting Started
@@ -25,15 +25,17 @@ type Post {
 Open `src/main.js` and paste your endpoint to the following line:
 
 ```js
-const networkInterface = createNetworkInterface({ uri: 'https://api.graph.cool/simple/v1/__PROJECT_ID__' })
+const httpLink = new HttpLink({
+   uri: 'https://api.graph.cool/simple/v1/__PROJECT_ID__'
+})
 ```
 
 ### 3. Run the example
 
-You're done configuring the example application. Please run the following command and open [localhost:3000](http://localhost:3000) in your browser. Have fun exploring! 🎉
+You're done configuring the example application. Please run the following command and open [localhost:8080](http://localhost:8080) in your browser. Have fun exploring! 🎉
 
 ```sh
-yarn && yarn start
+yarn && yarn serve
 # or npm install & npm start
 ```
 
