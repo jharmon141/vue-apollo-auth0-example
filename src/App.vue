@@ -7,6 +7,7 @@
   </div>
 </template>
 
+
 <script>
 import Auth0Lock from 'auth0-lock'
 import { userQuery } from './graphql/queries'

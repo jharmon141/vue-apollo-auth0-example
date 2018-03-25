@@ -18,7 +18,7 @@ export default {
     methods: {
         showLogin() {
             this.lock.show()
-        },
+        }
     },
 
     mounted() {
