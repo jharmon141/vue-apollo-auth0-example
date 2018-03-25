@@ -36,7 +36,6 @@ You're done configuring the example application. Please run the following comman
 
 ```sh
 yarn && yarn serve
-# or npm install & npm start
 ```
 
 
