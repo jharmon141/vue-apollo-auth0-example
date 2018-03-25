@@ -47,7 +47,7 @@ export default {
 
     fetchUser: async function() {
       await this.$apollo.queries.user.refetch()
-      const token = await localStorage.getItem('auth0IdToken')
+      const token = localStorage.getItem('auth0IdToken')
 
       if(!this.user && token) {
         this.$router.push({ name: 'createUser' })
