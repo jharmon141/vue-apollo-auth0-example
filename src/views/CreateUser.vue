@@ -43,7 +43,7 @@ export default {
 
     watch: {
         user: function(newValue) {
-            if (!!newValue.name) {
+            if (newValue.name) {
                 this.$router.push({ name: 'home' })
             }
         }
