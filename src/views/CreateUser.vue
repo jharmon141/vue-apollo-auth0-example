@@ -41,6 +41,14 @@ export default {
         emailSubscription: false
     }),
 
+    watch: {
+        user: function(newValue) {
+            if (!!newValue.name) {
+                this.$router.push({ name: 'home' })
+            }
+        }
+    },
+
     methods: {
         createUser() {
             const idToken = window.localStorage.getItem('auth0IdToken')
