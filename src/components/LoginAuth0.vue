@@ -22,9 +22,9 @@ export default {
     },
 
     mounted() {
-        this.lock.on('authenticated', (authResult) => {
-            localStorage.setItem('auth0IdToken', authResult.idToken)
-            this.lock.getUserInfo(authResult.accessToken, (error, profile) => {
+        this.lock.on('authenticated', async (authResult) => {
+            await localStorage.setItem('auth0IdToken', authResult.idToken)
+            await this.lock.getUserInfo(authResult.accessToken, (error, profile) => {
                 if (error) {
                     console.log(error)
                     return
