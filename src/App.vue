@@ -44,19 +44,13 @@ export default {
       this.user = null
     },
 
-    fetchUser() {
-      const token = localStorage.getItem('auth0IdToken')
-      const prom = new Promise(
-        (resolve) => {
-          resolve(this.$apollo.queries.user.refetch())
-        }
-      )
+    fetchUser: async function() {
+      await this.$apollo.queries.user.refetch()
+      const token = await localStorage.getItem('auth0IdToken')
 
-      prom.then(() => {
-        if (!this.user && token) {
-          this.$router.push({ name: 'createUser' })
-        }
-      })
+      if(!this.user && token) {
+        this.$router.push({ name: 'createUser' })
+      }
     }
   }
 }
