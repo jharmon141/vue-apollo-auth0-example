@@ -12,7 +12,7 @@ Vue.config.productionTip = false
 
 const httpLink = new HttpLink({
    uri: process.env.VUE_APP_GRAPHCOOL_URL
-});
+})
 
 const authMiddleware = new ApolloLink((operation, forward) => {
   operation.setContext({
