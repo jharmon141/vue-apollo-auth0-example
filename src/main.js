@@ -6,7 +6,6 @@ import { InMemoryCache } from 'apollo-cache-inmemory'
 import { ApolloLink, concat } from 'apollo-link'
 import VueApollo from 'vue-apollo'
 import router from './router'
-import store from './store'
 
 Vue.config.productionTip = false
 
@@ -39,7 +38,6 @@ Vue.use(VueApollo)
 new Vue({
   el: '#app',
   provide: apolloProvider.provide(),
-  store,
   router,
   render: h => h(App)
 })

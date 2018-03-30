@@ -45,7 +45,7 @@ export default {
       this.user = null
     },
 
-    fetchUser: async function() {
+    async fetchUser() {
       await this.$apollo.queries.user.refetch()
       const token = await localStorage.getItem('auth0IdToken')
 

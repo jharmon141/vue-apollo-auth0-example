@@ -30,10 +30,10 @@ import LoginAuth0 from '@/components/LoginAuth0.vue'
 export default {
     name: 'Home',
     props: {
-        authenticated: Boolean,
         user: Object,
         lock: Object,
-        fetchUser: Function
+        fetchUser: Function,
+        authenticated: Boolean
     },
 
     components: {
